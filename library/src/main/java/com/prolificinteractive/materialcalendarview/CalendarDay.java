@@ -81,48 +81,15 @@ public final class CalendarDay implements Parcelable {
     private transient Date _date;
 
     /**
-     * Initialized to the current day
-     *
-     * @see CalendarDay#today()
-     */
-    @Deprecated
-    public CalendarDay() {
-        this(CalendarUtils.getInstance());
-    }
-
-    /**
-     * @param calendar source to pull date information from for this instance
-     * @see CalendarDay#from(Calendar)
-     */
-    @Deprecated
-    public CalendarDay(Calendar calendar) {
-        this(
-                CalendarUtils.getYear(calendar),
-                CalendarUtils.getMonth(calendar),
-                CalendarUtils.getDay(calendar)
-        );
-    }
-
-    /**
      * @param year  new instance's year
      * @param month new instance's month as defined by {@linkplain java.util.Calendar}
      * @param day   new instance's day of month
      * @see CalendarDay#from(Calendar)
      */
-    @Deprecated
-    public CalendarDay(int year, int month, int day) {
+    CalendarDay(int year, int month, int day) {
         this.year = year;
         this.month = month;
         this.day = day;
-    }
-
-    /**
-     * @param date source to pull date information from for this instance
-     * @see CalendarDay#from(Date)
-     */
-    @Deprecated
-    public CalendarDay(Date date) {
-        this(CalendarUtils.getInstance(date));
     }
 
     /**
@@ -162,7 +129,7 @@ public final class CalendarDay implements Parcelable {
         if (_date == null) {
             _date = getCalendar().getTime();
         }
-        return _date;
+        return new Date(_date.getTime());
     }
 
     /**
@@ -176,7 +143,7 @@ public final class CalendarDay implements Parcelable {
             _calendar = CalendarUtils.getInstance();
             copyTo(_calendar);
         }
-        return _calendar;
+        return (Calendar) _calendar.clone();
     }
 
     void copyToMonthOnly(@NonNull Calendar calendar) {
