@@ -83,9 +83,9 @@ public class DynamicSettersActivity extends AppCompatActivity {
             widget.setDateTextAppearance(R.style.TextAppearance_AppCompat_Medium);
             widget.setWeekDayTextAppearance(R.style.TextAppearance_AppCompat_Medium);
         } else {
-            widget.setHeaderTextAppearance(R.style.TextAppearance_MaterialCalendarWidget_Header);
-            widget.setDateTextAppearance(R.style.TextAppearance_MaterialCalendarWidget_Date);
-            widget.setWeekDayTextAppearance(R.style.TextAppearance_MaterialCalendarWidget_WeekDay);
+            widget.setHeaderTextAppearance(R.style.TextAppearance_MaterialCalendarView_Header);
+            widget.setDateTextAppearance(R.style.TextAppearance_MaterialCalendarView_Date);
+            widget.setWeekDayTextAppearance(R.style.TextAppearance_MaterialCalendarView_WeekDay);
         }
         widget.setShowOtherDates(checked ? MaterialCalendarView.SHOW_ALL : MaterialCalendarView.SHOW_NONE);
     }

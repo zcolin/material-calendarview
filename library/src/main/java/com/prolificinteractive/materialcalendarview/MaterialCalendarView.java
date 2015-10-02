@@ -261,14 +261,14 @@ public class MaterialCalendarView extends ViewGroup {
                     R.styleable.MaterialCalendarView_mcv_leftArrowMask
             );
             if (leftMask == null) {
-                leftMask = getResources().getDrawable(R.drawable.mcv_action_previous);
+                leftMask = getResources().getDrawable(R.drawable.mcv_arrow_previous);
             }
             setLeftArrowMask(leftMask);
             Drawable rightMask = a.getDrawable(
                     R.styleable.MaterialCalendarView_mcv_rightArrowMask
             );
             if (rightMask == null) {
-                rightMask = getResources().getDrawable(R.drawable.mcv_action_next);
+                rightMask = getResources().getDrawable(R.drawable.mcv_arrow_next);
             }
             setRightArrowMask(rightMask);
 
@@ -291,15 +291,15 @@ public class MaterialCalendarView extends ViewGroup {
 
             setHeaderTextAppearance(a.getResourceId(
                     R.styleable.MaterialCalendarView_mcv_headerTextAppearance,
-                    R.style.TextAppearance_MaterialCalendarWidget_Header
+                    R.style.TextAppearance_MaterialCalendarView_Header
             ));
             setWeekDayTextAppearance(a.getResourceId(
                     R.styleable.MaterialCalendarView_mcv_weekDayTextAppearance,
-                    R.style.TextAppearance_MaterialCalendarWidget_WeekDay
+                    R.style.TextAppearance_MaterialCalendarView_WeekDay
             ));
             setDateTextAppearance(a.getResourceId(
                     R.styleable.MaterialCalendarView_mcv_dateTextAppearance,
-                    R.style.TextAppearance_MaterialCalendarWidget_Date
+                    R.style.TextAppearance_MaterialCalendarView_Date
             ));
             //noinspection ResourceType
             setShowOtherDates(a.getInteger(
@@ -344,7 +344,6 @@ public class MaterialCalendarView extends ViewGroup {
         addView(topbar, new LayoutParams(1));
 
         buttonPast.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        buttonPast.setImageResource(R.drawable.mcv_action_previous);
         topbar.addView(buttonPast, new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1));
 
         title.setGravity(Gravity.CENTER);
@@ -353,7 +352,6 @@ public class MaterialCalendarView extends ViewGroup {
         ));
 
         buttonFuture.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        buttonFuture.setImageResource(R.drawable.mcv_action_next);
         topbar.addView(buttonFuture, new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1));
 
         pager.setId(R.id.mcv_pager);

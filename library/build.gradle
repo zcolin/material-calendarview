@@ -6,6 +6,8 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
+    resourcePrefix "mcv_"
+
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 23
