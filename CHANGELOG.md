@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+Version 2.0.0 *(FUTURE)*
+------------------------
+
+* Change: Update default arrow assets
+* Change: Move public constructors for `CalendarDay`
+* Fix: Change name of default TextAppearances
+
 Version 1.0.1 *(2015-09-30)*
 ------------------------
 
