@@ -1,5 +1,6 @@
 package com.prolificinteractive.materialcalendarview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -30,6 +31,7 @@ import com.prolificinteractive.materialcalendarview.format.DayFormatter;
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
 import com.prolificinteractive.materialcalendarview.format.TitleFormatter;
 import com.prolificinteractive.materialcalendarview.format.WeekDayFormatter;
+import com.prolificinteractive.materialcalendarview.utils.ViewUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -99,6 +101,7 @@ public class MaterialCalendarView extends ViewGroup {
      * @see #setShowOtherDates(int)
      * @see #getShowOtherDates()
      */
+    @SuppressLint("UniqueConstants")
     @Retention(RetentionPolicy.RUNTIME)
     @IntDef(flag = true, value = {
             SHOW_NONE, SHOW_ALL, SHOW_DEFAULTS,
@@ -275,7 +278,7 @@ public class MaterialCalendarView extends ViewGroup {
             setSelectionColor(
                     a.getColor(
                             R.styleable.MaterialCalendarView_mcv_selectionColor,
-                            getThemeAccentColor(context)
+                            ViewUtils.getThemeAccentColor(context)
                     )
             );
 
@@ -993,19 +996,6 @@ public class MaterialCalendarView extends ViewGroup {
             topbarVisible = in.readInt() == 1;
             selectionMode = in.readInt();
         }
-    }
-
-    private static int getThemeAccentColor(Context context) {
-        int colorAttr;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            colorAttr = android.R.attr.colorAccent;
-        } else {
-            //Get colorAccent defined for AppCompat
-            colorAttr = context.getResources().getIdentifier("colorAccent", "attr", context.getPackageName());
-        }
-        TypedValue outValue = new TypedValue();
-        context.getTheme().resolveAttribute(colorAttr, outValue, true);
-        return outValue.data;
     }
 
     /**
