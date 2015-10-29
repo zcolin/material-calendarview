@@ -90,7 +90,12 @@ public class DynamicSettersActivity extends AppCompatActivity {
         widget.setShowOtherDates(checked ? MaterialCalendarView.SHOW_ALL : MaterialCalendarView.SHOW_NONE);
     }
 
-    @OnClick(R.id.button_min_date)
+    @OnCheckedChanged(R.id.check_page_enabled) 
+    void onPageEnabledChecked(boolean checked) {
+        widget.setPagingEnabled(checked);
+    }
+
+    @OnClick(R.id.button_min_date) 
     void onMinClicked() {
         showDatePickerDialog(this, widget.getMinimumDate(), new DatePickerDialog.OnDateSetListener() {
             @Override
