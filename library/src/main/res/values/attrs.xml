@@ -58,6 +58,11 @@
             <enum name="vertical" value="0" />
             <enum name="horizontal" value="1" />
         </attr>
+
+        <attr name="mcv_pagerOrientation" format="enum">
+            <enum name="vertical" value="0" />
+            <enum name="horizontal" value="1" />
+        </attr>
     </declare-styleable>
 
 </resources>
