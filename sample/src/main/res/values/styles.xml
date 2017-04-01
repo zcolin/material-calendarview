@@ -2,15 +2,15 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme"
-        parent="Theme.AppCompat.Light.DarkActionBar">
+           parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/sample_primary</item>
         <item name="colorPrimaryDark">@color/sample_primary</item>
         <item name="colorAccent">@color/sample_accent</item>
     </style>
 
-    <style name="CustomDayTextAppearance"
-        parent="TextAppearance.AppCompat.Medium">
+    <style name="CustomDayTextAppearance" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textColor">@color/mcv_text_date_light</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
 </resources>
