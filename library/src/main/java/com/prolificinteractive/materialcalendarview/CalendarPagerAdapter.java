@@ -23,23 +23,24 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     private final ArrayDeque<V> currentViews;
 
     protected final MaterialCalendarView mcv;
-    private final CalendarDay today;
+    private final   CalendarDay          today;
 
-    private TitleFormatter titleFormatter = null;
-    private Integer color = null;
-    private Integer dateTextAppearance = null;
-    private Integer weekDayTextAppearance = null;
+    private TitleFormatter titleFormatter        = null;
+    private Integer        color                 = null;
+    private Integer        dateTextAppearance    = null;
+    private Integer        weekDayTextAppearance = null;
     @ShowOtherDates
-    private int showOtherDates = MaterialCalendarView.SHOW_DEFAULTS;
-    private CalendarDay minDate = null;
-    private CalendarDay maxDate = null;
+    private int            showOtherDates        = MaterialCalendarView.SHOW_DEFAULTS;
+    private CalendarDay    minDate               = null;
+    private CalendarDay    maxDate               = null;
     private DateRangeIndex rangeIndex;
-    private List<CalendarDay> selectedDates = new ArrayList<>();
-    private WeekDayFormatter weekDayFormatter = WeekDayFormatter.DEFAULT;
-    private DayFormatter dayFormatter = DayFormatter.DEFAULT;
-    private List<DayViewDecorator> decorators = new ArrayList<>();
-    private List<DecoratorResult> decoratorResults = null;
-    private boolean selectionEnabled = true;
+    private List<CalendarDay>      selectedDates    = new ArrayList<>();
+    private List<CalendarDay>      darkDays    = new ArrayList<>();
+    private WeekDayFormatter       weekDayFormatter = WeekDayFormatter.DEFAULT;
+    private DayFormatter           dayFormatter     = DayFormatter.DEFAULT;
+    private List<DayViewDecorator> decorators       = new ArrayList<>();
+    private List<DecoratorResult>  decoratorResults = null;
+    private boolean                selectionEnabled = true;
 
     CalendarPagerAdapter(MaterialCalendarView mcv) {
         this.mcv = mcv;
@@ -87,6 +88,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         newAdapter.minDate = minDate;
         newAdapter.maxDate = maxDate;
         newAdapter.selectedDates = selectedDates;
+        newAdapter.darkDays = darkDays;
         newAdapter.weekDayFormatter = weekDayFormatter;
         newAdapter.dayFormatter = dayFormatter;
         newAdapter.decorators = decorators;
@@ -155,6 +157,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         pagerView.setMinimumDate(minDate);
         pagerView.setMaximumDate(maxDate);
         pagerView.setSelectedDates(selectedDates);
+        pagerView.setDarkDays(darkDays);
 
         container.addView(pagerView);
         currentViews.add(pagerView);
@@ -285,6 +288,22 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         }
     }
 
+    public void notifyDarkDateChanged(){
+        invalidateDarkDates();
+    }
+
+    public void setDateDark(ArrayList<CalendarDay> list) {
+        darkDays.clear();
+        darkDays.addAll(list);
+        invalidateDarkDates();
+    }
+    
+    private void invalidateDarkDates() {
+        for (V pagerView : currentViews) {
+            pagerView.setDarkDays(darkDays);
+        }
+    }
+    
     private void invalidateSelectedDates() {
         validateSelectedDates();
         for (V pagerView : currentViews) {

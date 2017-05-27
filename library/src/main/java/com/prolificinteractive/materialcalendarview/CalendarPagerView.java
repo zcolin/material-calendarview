@@ -163,6 +163,15 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
         }
         postInvalidate();
     }
+    
+    public void setDarkDays(Collection<CalendarDay> dates) {
+        for (DayView dayView : dayViews) {
+            CalendarDay day = dayView.getDate();
+            dayView.setSelected(dates != null && dates.contains(day));
+        }
+        postInvalidate();
+    }
+    
 
     protected void updateUi() {
         for (DayView dayView : dayViews) {

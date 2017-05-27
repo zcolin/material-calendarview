@@ -44,11 +44,11 @@ class DayView extends CheckedTextView {
     private Drawable mCircleDrawable;
     private DayFormatter formatter = DayFormatter.DEFAULT;
 
-    private boolean isInRange = true;
-    private boolean isInMonth = true;
+    private boolean isInRange           = true;
+    private boolean isInMonth           = true;
     private boolean isDecoratedDisabled = false;
     @ShowOtherDates
-    private int showOtherDates = MaterialCalendarView.SHOW_DEFAULTS;
+    private int     showOtherDates      = MaterialCalendarView.SHOW_DEFAULTS;
 
     public DayView(Context context, CalendarDay day) {
         super(context);
@@ -109,7 +109,8 @@ class DayView extends CheckedTextView {
         if (drawable == null) {
             this.selectionDrawable = null;
         } else {
-            this.selectionDrawable = drawable.getConstantState().newDrawable(getResources());
+            this.selectionDrawable = drawable.getConstantState()
+                                             .newDrawable(getResources());
         }
         regenerateBackground();
     }
@@ -121,7 +122,8 @@ class DayView extends CheckedTextView {
         if (drawable == null) {
             this.customBackground = null;
         } else {
-            this.customBackground = drawable.getConstantState().newDrawable(getResources());
+            this.customBackground = drawable.getConstantState()
+                                            .newDrawable(getResources());
         }
         invalidate();
     }
@@ -166,7 +168,7 @@ class DayView extends CheckedTextView {
         setEnabled();
     }
 
-    private final Rect tempRect = new Rect();
+    private final Rect tempRect           = new Rect();
     private final Rect circleDrawableRect = new Rect();
 
     @Override
@@ -191,14 +193,16 @@ class DayView extends CheckedTextView {
         }
     }
 
-    private static Drawable generateBackground(int color, int fadeTime, Rect bounds) {
+    private Drawable generateBackground(int color, int fadeTime, Rect bounds) {
         StateListDrawable drawable = new StateListDrawable();
         drawable.setExitFadeDuration(fadeTime);
         drawable.addState(new int[]{android.R.attr.state_checked}, generateCircleDrawable(color));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawable.addState(new int[]{android.R.attr.state_pressed}, generateRippleDrawable(color, bounds));
+            drawable.addState(new int[]{android.R.attr.state_selected}, getResources().getDrawable(R.drawable.mcv_background_date_dark));
         } else {
             drawable.addState(new int[]{android.R.attr.state_pressed}, generateCircleDrawable(color));
+            drawable.addState(new int[]{android.R.attr.state_selected}, getResources().getDrawable(R.drawable.mcv_background_date_dark));
         }
 
         drawable.addState(new int[]{}, generateCircleDrawable(Color.TRANSPARENT));
@@ -208,7 +212,8 @@ class DayView extends CheckedTextView {
 
     private static Drawable generateCircleDrawable(final int color) {
         ShapeDrawable drawable = new ShapeDrawable(new OvalShape());
-        drawable.getPaint().setColor(color);
+        drawable.getPaint()
+                .setColor(color);
         return drawable;
     }
 
@@ -217,12 +222,12 @@ class DayView extends CheckedTextView {
         ColorStateList list = ColorStateList.valueOf(color);
         Drawable mask = generateCircleDrawable(Color.WHITE);
         RippleDrawable rippleDrawable = new RippleDrawable(list, null, mask);
-//        API 21
+        //        API 21
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
             rippleDrawable.setBounds(bounds);
         }
 
-//        API 22. Technically harmless to leave on for API 21 and 23, but not worth risking for 23+
+        //        API 22. Technically harmless to leave on for API 21 and 23, but not worth risking for 23+
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
             int center = (bounds.left + bounds.right) / 2;
             rippleDrawable.setHotspotBounds(center, bounds.top, center, bounds.bottom);
