@@ -97,7 +97,6 @@ public class DialogsActivity extends AppCompatActivity {
                     view.setDarkDate(calendars);
                 }
             });
-
             
             return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.title_activity_dialogs)
