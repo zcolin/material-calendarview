@@ -199,10 +199,10 @@ class DayView extends CheckedTextView {
         drawable.addState(new int[]{android.R.attr.state_checked}, generateCircleDrawable(color));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawable.addState(new int[]{android.R.attr.state_pressed}, generateRippleDrawable(color, bounds));
-            drawable.addState(new int[]{android.R.attr.state_selected}, getResources().getDrawable(R.drawable.ic_my_selector));
+            drawable.addState(new int[]{android.R.attr.state_selected}, getResources().getDrawable(R.drawable.my_selector_icon));
         } else {
             drawable.addState(new int[]{android.R.attr.state_pressed}, generateCircleDrawable(color));
-            drawable.addState(new int[]{android.R.attr.state_selected}, getResources().getDrawable(R.drawable.ic_my_selector));
+            drawable.addState(new int[]{android.R.attr.state_selected}, getResources().getDrawable(R.drawable.my_selector_icon));
         }
 
         drawable.addState(new int[]{}, generateCircleDrawable(Color.TRANSPARENT));
