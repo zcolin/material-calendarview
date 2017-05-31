@@ -88,7 +88,7 @@ public class DialogsActivity extends AppCompatActivity {
                     CalendarUtils.setToFirstDay(calendar);
                     Calendar calendar1 = Calendar.getInstance();
                     int year = getYear(calendar1);
-                    int month =currentMonth.getMonth();
+                    int month = currentMonth.getMonth();
                     calendar1.clear();
                     calendar1.set(year, month, 2);
                     ArrayList<Calendar> calendars = new ArrayList<>();
@@ -97,7 +97,7 @@ public class DialogsActivity extends AppCompatActivity {
                     view.setDarkDate(calendars);
                 }
             });
-            
+
             return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.title_activity_dialogs)
                     .setView(view)
