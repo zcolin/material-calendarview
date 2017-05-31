@@ -2008,7 +2008,6 @@ public class MaterialCalendarView extends ViewGroup {
         firstDayOfWeek = state.firstDayOfWeek;
         minDate = state.minDate;
         maxDate = state.maxDate;
-
         // Recreate adapter
         final CalendarPagerAdapter<?> newAdapter;
         switch (calendarMode) {
