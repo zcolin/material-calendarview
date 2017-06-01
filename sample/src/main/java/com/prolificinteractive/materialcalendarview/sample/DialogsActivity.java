@@ -23,8 +23,6 @@ import java.util.Calendar;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.prolificinteractive.materialcalendarview.CalendarUtils.getYear;
-
 /**
  * Shows off the most basic usage
  */
@@ -82,13 +80,11 @@ public class DialogsActivity extends AppCompatActivity {
             widget.setOnDateChangedListener(this);
             widget.setonPageSelectedListener(new MaterialCalendarView.PageSelectedListener() {
                 @Override
-                public void onPageSelected(MaterialCalendarView view, CalendarDay currentMonth) {
+                public void onPageSelected(MaterialCalendarView view, int year, int month) {
                     Calendar calendar = Calendar.getInstance();
-                    calendar.set(Calendar.MONTH, currentMonth.getMonth());
+                    calendar.set(Calendar.MONTH, month);
                     CalendarUtils.setToFirstDay(calendar);
                     Calendar calendar1 = Calendar.getInstance();
-                    int year = getYear(calendar1);
-                    int month = currentMonth.getMonth();
                     calendar1.clear();
                     calendar1.set(year, month, 2);
                     ArrayList<Calendar> calendars = new ArrayList<>();

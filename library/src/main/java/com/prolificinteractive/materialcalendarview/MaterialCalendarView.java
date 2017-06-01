@@ -209,12 +209,14 @@ public class MaterialCalendarView extends ViewGroup {
         public void onPageSelected(int position) {
             titleChanger.setPreviousMonth(currentMonth);
             currentMonth = adapter.getItem(position);
+            int month = currentMonth.getMonth();
+            int year = currentMonth.getYear();
             updateUi();
 
             dispatchOnMonthChanged(currentMonth);
 
             if (pageSelectedListener != null) {
-                pageSelectedListener.onPageSelected(MaterialCalendarView.this, currentMonth);
+                pageSelectedListener.onPageSelected(MaterialCalendarView.this, year, month);
             }
         }
 
@@ -2047,6 +2049,6 @@ public class MaterialCalendarView extends ViewGroup {
     }
 
     public interface PageSelectedListener {
-        void onPageSelected(MaterialCalendarView view, CalendarDay currentMonth);
+        void onPageSelected(MaterialCalendarView view, int year, int month);
     }
 }
