@@ -101,6 +101,7 @@ public class DialogsActivity extends AppCompatActivity {
                     .create();
         }
 
+
         @Override
         public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
             textView.setText(FORMATTER.format(date.getDate()));

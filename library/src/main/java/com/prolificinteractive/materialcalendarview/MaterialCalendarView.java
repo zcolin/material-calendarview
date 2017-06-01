@@ -220,6 +220,7 @@ public class MaterialCalendarView extends ViewGroup {
             }
         }
 
+
         @Override
         public void onPageScrollStateChanged(int state) {
         }
