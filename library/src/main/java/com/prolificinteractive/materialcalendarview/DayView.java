@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -37,6 +38,7 @@ class DayView extends CheckedTextView {
 
     private CalendarDay date;
     private int selectionColor = Color.GRAY;
+    private String mColor;
 
     private final int fadeTime;
     private Drawable customBackground = null;
@@ -64,6 +66,11 @@ class DayView extends CheckedTextView {
         }
 
         setDay(day);
+    }
+
+    public void setDarkDayColor(String mColor) {
+        this.mColor = mColor;
+        regenerateBackground();
     }
 
     public void setDay(CalendarDay date) {
@@ -155,8 +162,7 @@ class DayView extends CheckedTextView {
         }
 
         if (!isInMonth && shouldBeVisible) {
-            setTextColor(getTextColors().getColorForState(
-                    new int[]{-android.R.attr.state_enabled}, Color.GRAY));
+            setTextColor(getTextColors().getColorForState(new int[]{-android.R.attr.state_enabled}, Color.GRAY));
         }
         setVisibility(shouldBeVisible ? View.VISIBLE : View.INVISIBLE);
     }
@@ -196,13 +202,27 @@ class DayView extends CheckedTextView {
     private Drawable generateBackground(int color, int fadeTime, Rect bounds) {
         StateListDrawable drawable = new StateListDrawable();
         drawable.setExitFadeDuration(fadeTime);
+
+        int fillColor; //内部填充颜色
+        if (mColor != null) {
+            fillColor = Color.parseColor(mColor);
+        } else {
+            fillColor = Color.parseColor("#99c0c0c0");
+        }
+        int strokeWidth = 10;//边框宽度
+        int strokeColor = Color.parseColor("#00000000");//边框颜色
+        GradientDrawable draw = new GradientDrawable();
+        draw.setShape(GradientDrawable.OVAL);
+        draw.setColor(fillColor);
+        draw.setStroke(strokeWidth, strokeColor);
+
         drawable.addState(new int[]{android.R.attr.state_checked}, generateCircleDrawable(color));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawable.addState(new int[]{android.R.attr.state_pressed}, generateRippleDrawable(color, bounds));
-            drawable.addState(new int[]{android.R.attr.state_selected}, getResources().getDrawable(R.drawable.mcv_background_date_dark));
+            drawable.addState(new int[]{android.R.attr.state_selected}, draw);
         } else {
             drawable.addState(new int[]{android.R.attr.state_pressed}, generateCircleDrawable(color));
-            drawable.addState(new int[]{android.R.attr.state_selected}, getResources().getDrawable(R.drawable.mcv_background_date_dark));
+            drawable.addState(new int[]{android.R.attr.state_selected}, draw);
         }
 
         drawable.addState(new int[]{}, generateCircleDrawable(Color.TRANSPARENT));

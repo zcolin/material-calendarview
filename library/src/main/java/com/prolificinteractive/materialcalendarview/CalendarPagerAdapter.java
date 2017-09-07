@@ -297,10 +297,22 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         darkDays.addAll(list);
         invalidateDarkDates();
     }
+
+    public void setDateDark(ArrayList<CalendarDay> list,String mColor) {
+        darkDays.clear();
+        darkDays.addAll(list);
+        invalidateDarkDates(mColor);
+    }
     
     private void invalidateDarkDates() {
         for (V pagerView : currentViews) {
             pagerView.setDarkDays(darkDays);
+        }
+    }
+
+    private void invalidateDarkDates(String mColor) {
+        for (V pagerView : currentViews) {
+            pagerView.setDarkDays(darkDays,mColor);
         }
     }
     
