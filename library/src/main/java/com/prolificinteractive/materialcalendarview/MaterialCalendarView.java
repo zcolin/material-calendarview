@@ -822,6 +822,14 @@ public class MaterialCalendarView extends ViewGroup {
         adapter.setDateDark(list);
     }
 
+    public void setDarkDate(ArrayList<Calendar> listCalendar,String mColor) {
+        ArrayList<CalendarDay> list = new ArrayList<>();
+        for (Calendar calendar : listCalendar) {
+            list.add(CalendarDay.from(calendar));
+        }
+        adapter.setDateDark(list,mColor);
+    }
+
 
     /**
      * @param date a Date to set as selected. Null to clear selection

@@ -90,7 +90,7 @@ public class DialogsActivity extends AppCompatActivity {
                     ArrayList<Calendar> calendars = new ArrayList<>();
                     calendars.add(calendar);
                     calendars.add(calendar1);
-                    view.setDarkDate(calendars);
+                    view.setDarkDate(calendars,"#ff0000");
                 }
             });
 

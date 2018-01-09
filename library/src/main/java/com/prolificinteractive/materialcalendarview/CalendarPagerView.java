@@ -19,29 +19,26 @@ import java.util.List;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.SHOW_DEFAULTS;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showOtherMonths;
 import static java.util.Calendar.DATE;
-import static java.util.Calendar.DAY_OF_WEEK;
 
 abstract class CalendarPagerView extends ViewGroup implements View.OnClickListener {
 
-    protected static final int DEFAULT_DAYS_IN_WEEK = 7;
-    protected static final int DEFAULT_MAX_WEEKS = 6;
-    protected static final int DAY_NAMES_ROW = 1;
-    private static final Calendar tempWorkingCalendar = CalendarUtils.getInstance();
-    private final ArrayList<WeekDayView> weekDayViews = new ArrayList<>();
-    private final ArrayList<DecoratorResult> decoratorResults = new ArrayList<>();
+    protected static final int                        DEFAULT_DAYS_IN_WEEK = 7;
+    protected static final int                        DEFAULT_MAX_WEEKS    = 6;
+    protected static final int                        DAY_NAMES_ROW        = 1;
+    private static final   Calendar                   tempWorkingCalendar  = CalendarUtils.getInstance();
+    private final          ArrayList<WeekDayView>     weekDayViews         = new ArrayList<>();
+    private final          ArrayList<DecoratorResult> decoratorResults     = new ArrayList<>();
     @ShowOtherDates
-    protected int showOtherDates = SHOW_DEFAULTS;
+    protected              int                        showOtherDates       = SHOW_DEFAULTS;
     private MaterialCalendarView mcv;
-    private CalendarDay firstViewDay;
+    private CalendarDay          firstViewDay;
     private CalendarDay minDate = null;
     private CalendarDay maxDate = null;
     private int firstDayOfWeek;
 
     private final Collection<DayView> dayViews = new ArrayList<>();
 
-    public CalendarPagerView(@NonNull MaterialCalendarView view,
-                             CalendarDay firstViewDay,
-                             int firstDayOfWeek) {
+    public CalendarPagerView(@NonNull MaterialCalendarView view, CalendarDay firstViewDay, int firstDayOfWeek) {
         super(view.getContext());
         this.mcv = view;
         this.firstViewDay = firstViewDay;
@@ -163,7 +160,7 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
         }
         postInvalidate();
     }
-    
+
     public void setDarkDays(Collection<CalendarDay> dates) {
         for (DayView dayView : dayViews) {
             CalendarDay day = dayView.getDate();
@@ -171,13 +168,20 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
         }
         postInvalidate();
     }
-    
+
+    public void setDarkDays(Collection<CalendarDay> dates, String mColor) {
+        for (DayView dayView : dayViews) {
+            CalendarDay day = dayView.getDate();
+            dayView.setSelected(dates != null && dates.contains(day));
+            dayView.setDarkDayColor(mColor);
+        }
+        postInvalidate();
+    }
 
     protected void updateUi() {
         for (DayView dayView : dayViews) {
             CalendarDay day = dayView.getDate();
-            dayView.setupSelection(
-                    showOtherDates, day.isInRange(minDate, maxDate), isDayEnabled(day));
+            dayView.setupSelection(showOtherDates, day.isInRange(minDate, maxDate), isDayEnabled(day));
         }
         postInvalidate();
     }
@@ -242,15 +246,9 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
 
-            int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                    measureTileWidth,
-                    MeasureSpec.EXACTLY
-            );
+            int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(measureTileWidth, MeasureSpec.EXACTLY);
 
-            int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
-                    measureTileHeight,
-                    MeasureSpec.EXACTLY
-            );
+            int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(measureTileHeight, MeasureSpec.EXACTLY);
 
             child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
         }
@@ -258,7 +256,6 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
 
     /**
      * Return the number of rows to display per page
-     * @return
      */
     protected abstract int getRows();
 
