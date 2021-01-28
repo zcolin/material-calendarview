@@ -1,7 +1,9 @@
-package android.support.v4.view;
+package androidx.core.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * And was making view creation time rather large. So lets override it and make it better!
